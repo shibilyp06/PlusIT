@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axiosIntance from "../api/axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function UserLogin() {
   const navigate = useNavigate();
@@ -22,22 +23,25 @@ function UserLogin() {
       const email = formData.email;
       const password = formData.password;
 
-      const responce = await axiosIntance.post("/api/login", {
+      const response = await axiosIntance.post("/api/login", {
         email,
         password,
       });
 
-      const token = responce.data.token;
+      const token = response.data.token;
       localStorage.setItem("token", token);
 
-      if (responce.status == 200) {
+      if (response.status == 200) {
         navigate("/Home");
       }
     } catch (err) {
-      console.error(err);
+      console.error( " jiii",err.response , " ll ");
+      console.error(err , " pppppp" );
+      if (err.response && err.response.status === 400) {
+        toast.error(err.response.data);
+      }
     }
   };
-  console.log(formData, " : form data");
   return (
     <div className="min-h-screen bg-gray-200 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">

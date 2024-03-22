@@ -11,7 +11,7 @@ function UserRouter() {
       <Routes>
         <Route path="/userLogin" element={<UserLogin />}></Route>
         <Route path="/userSignup" element={<UserSignup />}></Route>
-        <Route element={<AuthGuard />}>
+        <Route path="/" element={<AuthGuard />}>
           <Route path="/Home" element={<Home />}></Route>
           <Route path="/userUpdate" element={<UpdateProfile />}></Route>
         </Route>

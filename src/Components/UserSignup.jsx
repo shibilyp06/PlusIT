@@ -1,7 +1,10 @@
 import { useState } from "react";
 import axiosIntance from "../api/axios";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function UserSignup() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -28,10 +31,15 @@ function UserSignup() {
       });
 
       const token = responce.data.token;
+      if (responce.status == 200) {
+        navigate("/Home");
+      }
       localStorage.setItem("token", token);
-
     } catch (err) {
       console.error(err);
+      if (err.response && err.response.status === 400) {
+        toast.error(err.response.data);
+      }
     }
   };
   console.log(formData, " : form data");

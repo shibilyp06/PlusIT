@@ -6,19 +6,21 @@ function AuthGuard() {
   const [protect, setProtect] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    try {
-      const isProtected = async () => {
+    const isProtected = async () => {
+      try {
         const response = await axiosInstance.get("/api/protected");
+        console.log(response);
         if (response.status == 200) {
           setProtect(true);
-        } else {
-          return navigate("/userLogin");
         }
-      };
-      isProtected();
-    } catch (err) {
-      console.error(err);
-    }
+      } catch (err) {
+        if (err.response && err.response.status === 400) {
+          navigate("/userLogin");
+        }
+        console.error(err);
+      }
+    };
+    isProtected();
   }, []);
   return <>{protect && <Outlet />}</>;
 }
