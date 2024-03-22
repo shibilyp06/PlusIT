@@ -11,9 +11,8 @@ function Home() {
     const fetchItems = async () => {
       try {
         const response = await axiosInstance.get(
-          "https://interview-plus.onrender.com/api/items"
+          "/api/items"
         );
-        console.log(response.data, " : dattas");
         setDatas(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);

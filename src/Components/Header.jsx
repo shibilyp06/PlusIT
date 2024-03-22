@@ -1,7 +1,27 @@
-import React from "react";
-import { Link } from "react-router-dom";
+
+import { Link, useNavigate } from "react-router-dom";
+import axiosInstance from "../api/axios";
+import { toast } from "react-toastify";
 
 const Header = () => {
+    const navigate = useNavigate()
+  const deleteUser = async () => {
+    try {
+      const responce = await axiosInstance.delete(
+        "api/delete-user"
+      );
+      const deleted = responce.data 
+      console.log(deleted , " loo ");
+      if(deleted){
+        toast.error("Your accound has deleted  Signup ")
+        setTimeout(() => {
+            navigate("/userSignup")
+        }, 3000);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <header className="bg-gray-800 text-white py-4">
       <div className="container mx-auto flex justify-between items-center">
@@ -23,9 +43,9 @@ const Header = () => {
                 </a>
               </li>
             </Link>
-            <li>
+            <li onClick={deleteUser}>
               <a href="#" className="hover:text-gray-300">
-                Contact
+                Delete
               </a>
             </li>
           </ul>

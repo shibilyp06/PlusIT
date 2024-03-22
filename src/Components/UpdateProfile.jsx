@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import axiosInstance from "../api/axios";
 import Header from "./Header";
 import {  toast } from "react-toastify";
@@ -29,16 +29,13 @@ const UpdateProfile = () => {
     setLoading(true);
 
     try {
-      const response = await axiosInstance.put("https://interview-plus.onrender.com/api/update-user", {
+      const response = await axiosInstance.put("/api/update-user", {
         name,
         password,
       });
       console.log("Profile updated:", response.data);
 
-      setName("");
-      setPassword("");
-
-      alert("Profile updated successfully!");
+      toast.success("Profile updated successfully!");
     } catch (error) {
       console.error("Error updating profile:", error);
       // Display error message
