@@ -8,17 +8,25 @@ const Header = () => {
         <h1 className="text-2xl font-bold">My Store</h1>
         <nav>
           <ul className="flex space-x-4">
-            <li>
-              <a href="#" className="hover:text-gray-300">Home</a>
-            </li>
+            <Link to="/Home">
+              <li>
+                <a href="#" className="hover:text-gray-300">
+                  Home
+                </a>
+              </li>
+            </Link>
+
             <Link to="/userUpdate">
-            <li>
-              <a href="#" className="hover:text-gray-300">Update Profile</a>
-            </li>
+              <li>
+                <a href="#" className="hover:text-gray-300">
+                  Update Profile
+                </a>
+              </li>
             </Link>
             <li>
-              <a href="#" className="hover:text-gray-300">Contact</a>
-
+              <a href="#" className="hover:text-gray-300">
+                Contact
+              </a>
             </li>
           </ul>
         </nav>

@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axiosInstance from "../api/axios";
 import Header from "../Components/Header";
-import UpdateProfile from "../Components/UpdateProfile";
 
 function Home() {
   const [datas, setDatas] = useState([]);
-  const [update, setUpdate] = useState(false);
   useEffect(() => {
+    toast.success("Welcome to home ")
     const fetchItems = async () => {
       try {
         const response = await axiosInstance.get(
@@ -27,8 +26,6 @@ function Home() {
   return (
     <div>
       <Header />
-      {update && <UpdateProfile />}
-      <ToastContainer style={{ width: "40%" }} />
       <div className="flex flex-wrap justify-center">
         {datas.map((product) => (
           <div
